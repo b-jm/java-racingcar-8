@@ -7,11 +7,11 @@ import static racingcar.constant.ErrorMessage.*;
 public class Rounds {
 
     public Rounds(String rawCount) {
-        BigInteger count = parseToInt(rawCount);
+        BigInteger count = parseToBigInteger(rawCount);
         validatePositive(count);
     }
 
-    private BigInteger parseToInt(String rawCount) {
+    private BigInteger parseToBigInteger(String rawCount) {
         try {
             return new BigInteger(rawCount);
         } catch (NumberFormatException e) {
