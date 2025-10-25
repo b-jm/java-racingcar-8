@@ -14,5 +14,9 @@ public class Input {
         return Console.readLine();
     }
 
+    public String inputTryCount() {
+        System.out.println(TRY_COUNT_INPUT_MESSAGE);
+        return Console.readLine();
+    }
 
 }
