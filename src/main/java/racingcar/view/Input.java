@@ -9,10 +9,9 @@ import static racingcar.constant.InputMessage.*;
 
 public class Input {
 
-    public List<String> inputCarNames() {
+    public String inputCarNames() {
         System.out.println(CAR_NAMES_INPUT_MESSAGE);
-        String CarNames = Console.readLine();
-        return Arrays.stream(CarNames.split(",")).toList();
+        return Console.readLine();
     }
 
 
