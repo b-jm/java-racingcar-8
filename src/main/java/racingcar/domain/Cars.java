@@ -10,9 +10,14 @@ import static racingcar.constant.ErrorMessage.*;
 public class Cars {
     private static final int MINIMUMSIZE_CARS_COUNT = 2;
 
+    private List<Car> cars;
+
     public Cars(String rawNames) {
         List<String> carNames = parseNames(rawNames);
         validateList(carNames);
+        this.cars = carNames.stream()
+                .map(name -> new Car(name))
+                .toList();
     }
 
     private List<String> parseNames(String rawNames) {
@@ -37,4 +42,7 @@ public class Cars {
         }
     }
 
+    public List<Car> getCars() {
+        return cars;
+    }
 }
