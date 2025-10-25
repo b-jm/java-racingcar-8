@@ -11,6 +11,8 @@ public class Car {
 
     private void validate(String name) {
         validateNameLength(name);
+        validateNoBlank(name);
+        validateNoEmpty(name);
     }
 
     private void validateNameLength(String name) {
@@ -19,5 +21,15 @@ public class Car {
         }
     }
 
+    private void validateNoBlank(String name) {
+        if (name.contains(" ")) {
+            throw new IllegalArgumentException(ERROR_CAR_NAME_BLANK);
+        }
+    }
 
+    private void validateNoEmpty(String name) {
+        if (name.isEmpty()) {
+            throw new IllegalArgumentException(ERROR_CAR_NAME_EMPTY);
+        }
+    }
 }
