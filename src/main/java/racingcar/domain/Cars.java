@@ -1,5 +1,7 @@
 package racingcar.domain;
 
+import racingcar.util.RandomNumberGenerator;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -18,6 +20,7 @@ public class Cars {
         this.cars = carNames.stream()
                 .map(name -> new Car(name))
                 .toList();
+
     }
 
     private List<String> parseNames(String rawNames) {
@@ -39,6 +42,15 @@ public class Cars {
         Set<String> uniqueNames = new HashSet<>(names);
         if (uniqueNames.size() != names.size()) {
             throw new IllegalArgumentException(ERROR_CAR_NAME_DUPLICATE);
+        }
+    }
+
+    public void moveAllCars() {
+        NumberGenerator numberGenerator = new RandomNumberGenerator();
+        for (Car car : cars) {
+            int randomNumber = numberGenerator.pickNumber();
+
+            car.move(randomNumber);
         }
     }
 

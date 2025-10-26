@@ -4,6 +4,7 @@ import static racingcar.constant.ErrorMessage.*;
 
 public class Car {
     private static final int MAX_NAME_LENGTH = 5;
+    private static final int MOVE_CONDITION_NUMBER = 4;
 
     public Car(String name) {
         validate(name);
@@ -31,5 +32,9 @@ public class Car {
         if (name.isEmpty()) {
             throw new IllegalArgumentException(ERROR_CAR_NAME_EMPTY);
         }
+    }
+
+    public void move(int randomNumber) {
+        
     }
 }
