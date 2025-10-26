@@ -14,13 +14,15 @@ public class Cars {
 
     private List<Car> cars;
 
-    public Cars(String rawNames) {
+    private final NumberGenerator numberGenerator;
+
+    public Cars(String rawNames, NumberGenerator numberGenerator) {
         List<String> carNames = parseNames(rawNames);
         validateList(carNames);
         this.cars = carNames.stream()
                 .map(name -> new Car(name))
                 .toList();
-
+        this.numberGenerator = numberGenerator;
     }
 
     private List<String> parseNames(String rawNames) {
@@ -46,7 +48,6 @@ public class Cars {
     }
 
     public void moveAllCars() {
-        NumberGenerator numberGenerator = new RandomNumberGenerator();
         for (Car car : cars) {
             int randomNumber = numberGenerator.pickNumber();
 
