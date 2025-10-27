@@ -39,7 +39,7 @@ public class Car {
     }
 
     public void move(int randomNumber) {
-        if(randomNumber >= MOVE_CONDITION_NUMBER) {
+        if(randomNumber > MOVE_CONDITION_NUMBER) {
             position++;
         }
     }
