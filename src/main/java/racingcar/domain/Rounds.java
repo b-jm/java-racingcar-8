@@ -1,27 +1,31 @@
 package racingcar.domain;
 
-import java.math.BigInteger;
-
 import static racingcar.constant.ErrorMessage.*;
 
 public class Rounds {
 
+    private final int count;
+
     public Rounds(String rawCount) {
-        BigInteger count = parseToBigInteger(rawCount);
+        this.count = parseToInt(rawCount);
         validatePositive(count);
     }
 
-    private BigInteger parseToBigInteger(String rawCount) {
+    private int parseToInt(String rawCount) {
         try {
-            return new BigInteger(rawCount);
+            return Integer.parseInt(rawCount);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR_ROUND_NOT_POSITIVE);
         }
     }
 
-    private void validatePositive(BigInteger count) {
-        if (count.signum() <= 0) {
+    private void validatePositive(int count) {
+        if (count <= 0) {
             throw new IllegalArgumentException(ERROR_ROUND_NOT_NUMBER);
         }
+    }
+
+    public int getCount() {
+        return count;
     }
 }
