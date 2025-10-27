@@ -1,18 +1,53 @@
 package racingcar.controller;
 
-import racingcar.domain.Cars;
-import racingcar.domain.Rounds;
+import racingcar.domain.*;
+import racingcar.service.RaceService;
+import racingcar.util.RandomNumberGenerator;
 import racingcar.view.Input;
+import racingcar.view.Output;
+
+import java.util.List;
 
 public class RacingController {
-    private final Input input = new Input();
+    private final Input input;
+    private final Output output;
+    private final NumberGenerator numberGenerator;
+
+    public RacingController() {
+        this.input = new Input();
+        this.output = new Output();
+        this.numberGenerator = new RandomNumberGenerator();
+    }
 
     public void run() {
-        String rawNames = input.inputCarNames();
-        Cars cars = new Cars(rawNames);
+        Cars cars = setupCars();
+        Rounds rounds = setupRounds();
 
+        Race race = new Race(cars, rounds);
+        RaceService raceService = new RaceService(race);
 
-        String rawCount = input.inputTryCount();
-        Rounds rounds = new Rounds(rawCount);
+        output.printResultTitle();
+        int roundCount = race.getRoundCount();
+
+        for (int i = 0; i < roundCount; i++) {
+            raceService.runSingleRound();
+            output.printCarsStatus(race.getCurrentCars());
+        }
+
+        List<Car> winners = raceService.getWinners();
+        output.printWinners(winners);
     }
+
+    private Cars setupCars() {
+        String rawNames = input.inputCarNames();
+
+        return new Cars(rawNames, numberGenerator);
+    }
+
+    private Rounds setupRounds() {
+        String rawCount = input.inputTryCount();
+
+        return new Rounds(rawCount);
+    }
+
 }
