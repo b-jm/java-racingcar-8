@@ -1,7 +1,5 @@
 package racingcar.domain;
 
-import racingcar.util.RandomNumberGenerator;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -57,5 +55,19 @@ public class Cars {
 
     public List<Car> getCars() {
         return cars;
+    }
+
+    public List<Car> findWinners() {
+        int maxPosition = findMaxPosition();
+        return cars.stream()
+                .filter(car -> car.getPosition() == maxPosition)
+                .toList();
+    }
+
+    private int findMaxPosition() {
+        return cars.stream()
+                .mapToInt(Car::getPosition)
+                .max()
+                .orElse(0);
     }
 }
